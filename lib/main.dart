@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'My Cross-Platform App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'My Cross-Platform App'),
     );
   }
 }
@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  // function which increases the counter by 1
   void _incrementCounter() {
     setState(
       () {
@@ -40,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // function which decreases the counter by 1
   void _decrementCounter() {
     setState(
       () {
@@ -48,12 +50,35 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // function which resets the counter to zero
   void _resetCounter() {
     setState(
       () {
         _counter = 0;
       },
     );
+  }
+
+  // Snackbar to show when button is long pressed
+  _showSnackBar(int type) {
+    var snackbarMsg = '';
+    switch (type) {
+      case 1:
+        snackbarMsg = "Just click once to increment the counter by 1.";
+        break;
+      case -1:
+        snackbarMsg = "Just click once to decrease the counter by 1.";
+        break;
+      case 0:
+        snackbarMsg = "Just click once to make the counter zero.";
+        break;
+    }
+    final snackBar = SnackBar(
+      content: Text(snackbarMsg),
+      duration: const Duration(seconds: 1),
+    );
+    // show the snackbar
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -84,13 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   minWidth: 150.00,
                   color: Colors.green,
                   hoverColor: Colors.greenAccent,
-                  onLongPress: () {
-                    const snackbar = SnackBar(
-                      content: Text("Just click once to increase a number."),
-                      duration: Duration(seconds: 1),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  },
+                  onLongPress: _showSnackBar(1),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 10.0),
@@ -104,13 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   minWidth: 150.0,
                   color: Colors.red,
                   hoverColor: Colors.redAccent,
-                  onLongPress: () {
-                    const snackbar = SnackBar(
-                      content: Text("Just click once to decrease a number."),
-                      duration: Duration(seconds: 1),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  },
+                  onLongPress: _showSnackBar(-1),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 10.0),
@@ -124,14 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   minWidth: 150.0,
                   color: Colors.blue,
                   hoverColor: Colors.blueAccent,
-                  onLongPress: () {
-                    const snackbar = SnackBar(
-                      content:
-                          Text("Just click once to make the counter xero."),
-                      duration: Duration(seconds: 1),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  },
+                  onLongPress: _showSnackBar(0),
                 ),
               ],
             ),
