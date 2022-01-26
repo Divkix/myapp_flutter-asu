@@ -48,6 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void _resetCounter() {
+    setState(
+      () {
+        _counter = 0;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +107,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   onLongPress: () {
                     const snackbar = SnackBar(
                       content: Text("Just click once to decrease a number."),
+                      duration: Duration(seconds: 1),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  },
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                ),
+                MaterialButton(
+                  onPressed: _resetCounter,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: const Text('Reset Counter'),
+                  minWidth: 150.0,
+                  color: Colors.blue,
+                  hoverColor: Colors.blueAccent,
+                  onLongPress: () {
+                    const snackbar = SnackBar(
+                      content:
+                          Text("Just click once to make the counter xero."),
                       duration: Duration(seconds: 1),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
